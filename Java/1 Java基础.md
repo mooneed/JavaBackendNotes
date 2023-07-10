@@ -93,7 +93,7 @@ protected void finalize() throws Throwable {}
 ## hashCode方法的作用
 **作用**：利用Hash算法快速判断两个实例是否相等。极大的提升Java集合操作的性能。
 >例：如果不使用Hash算法，对于有1w个元素的Set集合（不允许元素重复）来说，插入操作要执行1w次判等；
-如果使用Hash算法，同样的Set，插入操作只需要对映射到同一个hashCode的链表/红黑树遍历判等即可，这通常会<8（不了解的同学请自行搜索哈希算法，以及学习笔记[Java集合](https://github.com/mooneed/JavaBackendNotes/blob/main/Java/Java%E9%9B%86%E5%90%88.md)）；  
+如果使用Hash算法，同样的Set，插入操作只需要对映射到同一个hashCode的链表/红黑树遍历判等即可，这通常会<8（不了解的同学请自行搜索哈希算法，以及学习笔记[Java集合](https://github.com/mooneed/JavaBackendNotes/blob/main/Java/2%20Java%E9%9B%86%E5%90%88.md)）；  
 ## 重写equals&hashCode方法
 **重写equals方法的原因**：equals默认实现是判断引用是否为同一实例，不符合很多业务场景的判等逻辑。  
 **重写hashCode方法的原因**：重写equals方法必须重写hashCode方法，否则会违反Object类的规范，导致HashSet/HashMap/HashTable等基于hash值的类的操作出现错误。  
@@ -130,7 +130,7 @@ protected void finalize() throws Throwable {}
 （1）类的静态属性class；（最常用）
 （2）类实例的getClass()方法；
 （3）Class类的静态方法 **`Class.forName("全限定类名")`**；
-（4）Classloader.loaderClass(String name, boolean resolve)（**`适用于仅需获取Class信息的场景`**）（不了解的同学请学习笔记[JVM](https://github.com/mooneed/JavaBackendNotes/blob/main/Java/JVM.md)）  
+（4）Classloader.loaderClass(String name, boolean resolve)（**`适用于仅需获取Class信息的场景`**）（不了解的同学请学习笔记[JVM](https://github.com/mooneed/JavaBackendNotes/blob/main/Java/4%20JVM.md)）  
 ### Field类
 ### Method类
 ### Constructor类
