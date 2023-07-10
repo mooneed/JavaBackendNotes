@@ -56,10 +56,10 @@ this和super关键字用于指代实例本身/父类实例，同时也是解决�
 # Object类
 ## Object类成员方法
 ```Java
-// 判断实例是否相等（基本类型判值，引用类型判hash值）
+// 判断实例是否相等（基本类型判值，引用类型判hashCode值）
 // 常重写用于：业务场景判等逻辑
 public boolean equals(Object obj)
-// 获取实例的hash值
+// 获取实例的hashCode值
 // 重写equals方法则必须重写hashCode方法
 public native int hashCode()
 // 默认获取实例的类名@HashCode
@@ -82,12 +82,16 @@ protected native Object clone() throws CloneNotSupportedException
 //
 protected void finalize() throws Throwable {}
 ```
-## hashCode的作用
-待完善
+## hashCode方法的作用
+**作用**：利用Hash算法快速判断两个实例是否相等。极大的提升Java集合操作的性能。
+>例：如果不使用Hash算法，对于有1w个元素的Set集合（不允许元素重复）来说，插入操作要执行1w次判等；
+如果使用Hash算法，同样的Set，插入操作只需要对映射到同一个hashCode的链表/红黑树遍历判等即可，这通常会<8（不了解的同学请自行搜索哈希算法，以及[Java集合](https://github.com/mooneed/JavaBackendNotes/blob/main/Java/Java%E9%9B%86%E5%90%88.md)）；  
 ## 重写equals&hashCode方法
-待完善
 **重写equals方法的原因**：equals默认实现是判断引用是否为同一实例，不符合很多业务场景的判等逻辑。
-**重写hashCode方法的原因**：重写equals方法必须重写hashCode方法，否则会违反Object类的规范（两个实例equals方法比较相等，则hashCode方法返回值也需相等；反之，不作要求），导致HashSet/HashMap/HashTable等基于hash值的类出现问题。
+**重写hashCode方法的原因**：重写equals方法必须重写hashCode方法，否则会违反Object类的规范，导致HashSet/HashMap/HashTable等基于hash值的类的操作出现错误。  
+>Tips：equals方法判断相等的两个实例，则hashCode也需相等；反之，不作要求。（Object类的规范之一）  
+
+>例：如果equals判等的Set的两个元素，hashCode不等，则在插入的过程中，不会映射到哈希表的相同位置，无法被重复检测逻辑检测到，故导致两个元素都成功插入到Set里，导致Set元素重复。
 # 关键字
 **面向对象相关关键字**：public/protected/private，this/super；（详见面向对象一节）
 **异常关键字**：try/catch/finally，throw，throws；（详见异常一节）
