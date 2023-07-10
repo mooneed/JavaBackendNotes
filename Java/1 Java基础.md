@@ -93,7 +93,7 @@ protected void finalize() throws Throwable {}
 ## hashCode方法的作用
 **作用**：利用Hash算法快速判断两个实例是否相等。极大的提升Java集合操作的性能。
 >例：如果不使用Hash算法，对于有1w个元素的Set集合（不允许元素重复）来说，插入操作要执行1w次判等；
-如果使用Hash算法，同样的Set，插入操作只需要对映射到同一个hashCode的链表/红黑树遍历判等即可，这通常会<8（不了解的同学请自行搜索哈希算法，以及[Java集合](https://github.com/mooneed/JavaBackendNotes/blob/main/Java/Java%E9%9B%86%E5%90%88.md)）；  
+如果使用Hash算法，同样的Set，插入操作只需要对映射到同一个hashCode的链表/红黑树遍历判等即可，这通常会<8（不了解的同学请自行搜索哈希算法，以及学习笔记[Java集合](https://github.com/mooneed/JavaBackendNotes/blob/main/Java/Java%E9%9B%86%E5%90%88.md)）；  
 ## 重写equals&hashCode方法
 **重写equals方法的原因**：equals默认实现是判断引用是否为同一实例，不符合很多业务场景的判等逻辑。  
 **重写hashCode方法的原因**：重写equals方法必须重写hashCode方法，否则会违反Object类的规范，导致HashSet/HashMap/HashTable等基于hash值的类的操作出现错误。  
@@ -114,6 +114,26 @@ protected void finalize() throws Throwable {}
 待完善
 # 反射
 待完善
+## 反射的作用
+## 反射的使用
+**反射的相关类**：
+（1）Class类：定义**类**的类；  
+（2）Field类：定义**类成员变量**的类；  
+（3）Method类：定义**类成员方法**的类；  
+（4）Constructor类：定义**类构造方法**的类；  
+**反射的使用**：先获取到类实例的Class实例，再通过获取到的Class实例获取类实例的成员的实例（即Field/Method/Constructor实例）。 
+### Class类
+**Class实例的创建**：（JVM在建立类实例时）
+（1）首次创建，需将.class文件读取到内存中，创建该类的Class实例；  
+（2）若内存中有该类的Class实例，则直接创建。  
+**Class实例的获取**：  
+（1）类的静态属性class；（最常用）
+（2）类实例的getClass()方法；
+（3）Class类的静态方法 **`Class.forName("全限定类名")`**；
+（4）Classloader.loaderClass(String name, boolean resolve)（**`适用于仅需获取Class信息的场景`**）（不了解的同学请学习笔记[JVM](https://github.com/mooneed/JavaBackendNotes/blob/main/Java/JVM.md)）  
+### Field类
+### Method类
+### Constructor类
 # 异常
 **Throwable**：所有异常的父类，包括Error（JVM无法处理的错误）和Exception。  
 **Exception**分为两种：  
