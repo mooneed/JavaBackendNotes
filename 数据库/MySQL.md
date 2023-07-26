@@ -272,6 +272,7 @@ select ... for update;
 死锁问题建议精读小林coding的死锁章节的案例分析[1](https://www.xiaolincoding.com/mysql/lock/deadlock.html)，[2](https://www.xiaolincoding.com/mysql/lock/show_lock.html#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C)。  
 **死锁容易发生的场景**：  
 并发插入操作最容易发生死锁（多个线程均持有某插入位置的间隙锁时，线程执行插入操作的插入意向锁全部会被阻塞，并陷入死锁）。（主要因为间隙锁之间共享）  
+并发的读锁也非常容易发生死锁。因为两个线程同时持有某行的读锁时，而后又都想要获取该行的写锁，就会死锁。  
 新增订单时做幂等性校验，通过当前读确定订单不存在。  
 **死锁的必要条件**：  
 （1）互斥；  
